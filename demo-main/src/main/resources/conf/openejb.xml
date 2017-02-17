@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openejb>
+    <Resource id="demoDS" type="javax.sql.DataSource">
+        JtaManaged = true
+
+        JdbcDriver org.hsqldb.jdbcDriver
+        JdbcUrl jdbc:hsqldb:file:demo;sql.syntax_pgs=true;shutdown=true
+        UserName sa
+        Password
+    </Resource>
+
+    <Resource id="demoDSNonJTA" type="javax.sql.DataSource">
+        JtaManaged = false
+
+        JdbcDriver org.hsqldb.jdbcDriver
+        JdbcUrl jdbc:hsqldb:file:demo;sql.syntax_pgs=true;shutdown=true
+        UserName sa
+        Password
+    </Resource>
+</openejb>

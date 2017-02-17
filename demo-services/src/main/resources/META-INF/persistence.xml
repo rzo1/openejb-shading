@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <persistence-unit name="demo">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <jta-data-source>java:openejb/Resource/demoDS</jta-data-source>
+        <non-jta-data-source>java:openejb/Resource/demoDSNonJTA</non-jta-data-source>
+
+        <class>com.github.rzo1.domain.DemoObject</class>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- see: http://stackoverflow.com/q/40818396 AND http://stackoverflow.com/a/40843536 -->
+            <property name="tomee.jpa.cdi" value="false" />
+        </properties>
+    </persistence-unit>
+</persistence>
