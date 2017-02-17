@@ -1,4 +1,4 @@
-A little break down example for a Stackoverflow question related to `maven-shade-plugin` and `openEJB`
+A little break down example for a [Stackoverflow question](http://stackoverflow.com/questions/42293912/building-a-standalone-openejb-jar-file) related to `maven-shade-plugin` and `openEJB`
 
 ##Base Setting:
 
