@@ -107,9 +107,7 @@
                                         </manifestEntries>
                                     </transformer>
                                     <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                    <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                        <resource>META-INF/openwebbeans/openwebbeans.properties</resource>
-                                    </transformer>
+                                    <transformer implementation="org.apache.openwebbeans.maven.shade.OpenWebBeansPropertiesTransformer"/>
                                 </transformers>
                                 <filters>
                                     <filter> <!-- we don't want JSF to be activated -->
@@ -126,6 +124,13 @@
                             </configuration>
                         </execution>
                     </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.openwebbeans</groupId>
+                            <artifactId>openwebbeans-maven</artifactId>
+                            <version>1.7.0</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
 
             </plugins>
