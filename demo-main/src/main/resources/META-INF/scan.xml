@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<scan>
+    <classes>
+        <class>com.github.rzo1.DemoMain</class>
+        <class>com.github.rzo1.service.DemoServiceImpl</class>
+    </classes>
+    <packages/>
+</scan>

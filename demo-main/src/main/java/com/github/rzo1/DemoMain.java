@@ -80,14 +80,18 @@ public class DemoMain implements Runnable {
             properties.setProperty("log4j.category.OpenEJB", "debug");
             properties.setProperty("log4j.category.OpenEJB.cdi", "debug");
             properties.setProperty("log4j.category.OpenEJB.options", "debug");
-            properties.setProperty("log4j.category.OpenEJB.server", "debug");
-            properties.setProperty("log4j.category.OpenEJB.startup", "debug");
-            properties.setProperty("log4j.category.OpenEJB.startup.service", "debug");
-            properties.setProperty("log4j.category.OpenEJB.startup.config", "debug");
+            properties.setProperty("log4j.category.OpenEJB.server", "info");
+            properties.setProperty("log4j.category.OpenEJB.startup", "info");
+            properties.setProperty("log4j.category.OpenEJB.startup.service", "info");
+            properties.setProperty("log4j.category.OpenEJB.startup.config", "info");
             properties.setProperty("log4j.category.org.apache.webbeans", "debug");
 
             Path launchPath = Paths.get(DemoMain.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             properties.setProperty("openejb.configuration", launchPath.toAbsolutePath() + "/conf/openejb.xml");
+
+            //http://tomee-openejb.979440.n4.nabble.com/Embedded-Tests-not-found-in-classpath-td979899.html
+            properties.setProperty("openejb.deployments.classpath.include", ".*demo.*");
+
 
             properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
             properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
