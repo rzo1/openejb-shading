@@ -71,6 +71,7 @@ public class DemoMain implements Runnable {
             properties.setProperty("admin.disabled", "true");
             properties.setProperty("openejb.jaxrs.application", "false");
 
+            //this is for adjusting log output easily
             properties.setProperty("log4j.rootLogger", "warn,C");
             properties.setProperty("log4j.appender.C", "org.apache.log4j.ConsoleAppender");
             properties.setProperty("log4j.appender.C.layout", "org.apache.log4j.PatternLayout");
@@ -87,12 +88,8 @@ public class DemoMain implements Runnable {
             Path launchPath = Paths.get(DemoMain.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             properties.setProperty("openejb.configuration", launchPath.toAbsolutePath() + "/conf/openejb.xml");
 
-            //http://tomee-openejb.979440.n4.nabble.com/Embedded-Tests-not-found-in-classpath-td979899.html
-            properties.setProperty("openejb.deployments.classpath.include", ".*demo.*");
-
-
             properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-            properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver"); // shouldnt be used if usin a managed datasource
+          //  properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver"); // shouldnt be used if usin a managed datasource
 
             // This is the line starting the EJB container
             ejbContainer = EJBContainer.createEJBContainer(properties);
