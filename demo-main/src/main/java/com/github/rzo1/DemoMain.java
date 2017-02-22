@@ -17,7 +17,7 @@ public class DemoMain implements Runnable {
 
     private static final String applicationName = "DemoMain";
 
-    private boolean ejbContainerReady;
+    private java.util.concurrent.CountDownLatch started = new CountDownLatch(1);
 
     @Inject
     private DemoService demoService;
@@ -38,9 +38,7 @@ public class DemoMain implements Runnable {
             thread.start();
 
             // looking of openejb container to come up
-            while (!importer.ejbContainerReady) {
-                Thread.sleep(200);
-            }
+            importer.started.await();
             logger.info("Application container start... [OK]");
 
             DemoObject demoObject = new DemoObject();
@@ -94,13 +92,13 @@ public class DemoMain implements Runnable {
 
 
             properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-            properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
+            properties.put("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver"); // shouldnt be used if usin a managed datasource
 
             // This is the line starting the EJB container
             ejbContainer = EJBContainer.createEJBContainer(properties);
             ejbContainer.getContext().bind("inject", this);
 
-            ejbContainerReady = true;
+            started.countDown();
 
             final CountDownLatch latch = new CountDownLatch(1);
             // Graceful shutdown
@@ -122,7 +120,7 @@ public class DemoMain implements Runnable {
                 // ignored
             }
         } catch (final Exception e) {
-            ejbContainerReady = false;
+            started.countDown();
             throw new RuntimeException(e);
         } finally {
             if (ejbContainer != null) {
