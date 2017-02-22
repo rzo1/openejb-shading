@@ -73,6 +73,19 @@ public class DemoMain implements Runnable {
             properties.setProperty("admin.disabled", "true");
             properties.setProperty("openejb.jaxrs.application", "false");
 
+            properties.setProperty("log4j.rootLogger", "warn,C");
+            properties.setProperty("log4j.appender.C", "org.apache.log4j.ConsoleAppender");
+            properties.setProperty("log4j.appender.C.layout", "org.apache.log4j.PatternLayout");
+            properties.setProperty("log4j.appender.C.layout.ConversionPattern", "%d{ISO8601} %-5p[%t] %c(%L):\\n%m%n");
+            properties.setProperty("log4j.category.OpenEJB", "debug");
+            properties.setProperty("log4j.category.OpenEJB.cdi", "debug");
+            properties.setProperty("log4j.category.OpenEJB.options", "debug");
+            properties.setProperty("log4j.category.OpenEJB.server", "debug");
+            properties.setProperty("log4j.category.OpenEJB.startup", "debug");
+            properties.setProperty("log4j.category.OpenEJB.startup.service", "debug");
+            properties.setProperty("log4j.category.OpenEJB.startup.config", "debug");
+            properties.setProperty("log4j.category.org.apache.webbeans", "debug");
+
             Path launchPath = Paths.get(DemoMain.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             properties.setProperty("openejb.configuration", launchPath.toAbsolutePath() + "/conf/openejb.xml");
 
