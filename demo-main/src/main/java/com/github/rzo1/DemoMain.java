@@ -28,7 +28,7 @@ public class DemoMain    {
     private DemoService demoService;
 
     @Module
-    @Classes({ DemoServiceImpl.class })
+    @Classes({ DemoServiceImpl.class, DemoObject.class })
     public EjbModule application() {
         final EjbJar ejbJar = new EjbJar().enterpriseBean(new StatelessBean(DemoMain.class));
         ejbJar.addEnterpriseBean(new StatelessBean(DemoServiceImpl.class));
@@ -73,7 +73,16 @@ public class DemoMain    {
         logger.info("Application container start...");
         try {
 
-            ApplicationComposers.run(DemoMain.class, args);
+            final DemoMain app = new DemoMain();
+            new ApplicationComposers(app).evaluate(app, () -> {
+                DemoObject demoObject = new DemoObject();
+
+                long oid = app.demoService.store(demoObject);
+
+                demoObject = app.demoService.get(oid);
+
+                logger.info("Object: {}", demoObject.toString());
+            });
 
 
         } catch (final Exception e) {
