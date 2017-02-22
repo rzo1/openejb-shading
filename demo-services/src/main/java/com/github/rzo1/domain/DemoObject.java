@@ -1,12 +1,3 @@
-/**
- *
- *  Copyright (c) 2014-2017 Martin Wiesner, Richard Zowalla, Daniel Zsebedits
- *  						     ALL RIGHTS RESERVED
- *
- * 						Urheber i.S.d. §7 UrhG sind
- *               Martin Wiesner, Richard Zowalla, Daniel Zsebedits
- *
- */
 package com.github.rzo1.domain;
 
 
